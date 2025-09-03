@@ -1,0 +1,5087 @@
+_type: export
+__export_format: 4
+__export_source: apimatic.transformer
+resources:
+- name: Folderit API
+  _type: workspace
+  _id: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: "# Changes\n\n### 2025.08.24 - 2.0.71\n* Permission properties now support narrowing with the `fields` parameter.\n\n### 2025.08.22 - 2.0.70\n* Automatically expand requested fields, expand parameter is not required for the fields listed under the expanded variants\n* Add `thumbnails` property to File and FileVersion schemas\n\n### 2025.08.21 - 2.0.69\n* Add extension filter to [entities by parent](#tag/Entity/operation/getEntitiesByParent), [entities by tag](#tag/Entity/operation/getEntitiesByTag) and [all entities](#tag/Entity/operation/getAllEntities)\n\n### 2025.08.12 - 2.0.68\n* Add `parentUid` query parameter to [Recycled entities](#tag/Entity/operation/getRecycledEntities)\n\n### 2025.08.11 - 2.0.67\n* Add `position` as an expandable field to a team user\n\n### 2025.08.10 - 2.0.66\n* Alter [Team users](#tag/Account/operation/getTeamUsers) endpoint to a paginated response, add groups as an expandable field to a team user\n\n### 2025.07.31 - 2.0.65\n* Add lockId to [Lock a file](#tag/File/operation/lockFilePost) request  \n  Unlocking is supported only with a [PUT request](#tag/File/operation/unlockFile2)\n\n### 2025.07.29 - 2.0.64\n* Add teamUserStatus field to [account users](#tag/Account/operation/getAccountUsers) and status field to [account team users](#tag/Account/operation/getTeamUsers)\n\n### 2025.07.24 - 2.0.63\n* Add an optional operator to the search filter filterItem->number\n\n### 2025.07.01 - 2.0.62\n* Add account stats expandable field\n\n### 2025.06.10 - 2.0.61\n* Add paginated response variants to [reminder listings](#tag/Reminder)\n* Add recurrence property to [update a Reminder](#tag/Reminder/operation/updateReminder)\n\n### 2025.06.04 - 2.0.60\n* Add a method to [empty the recycle bin](#tag/Entity/operation/emptyRecycleBin)\n\n### 2025.06.03 - 2.0.59\n* Add the size property to [file versions](#tag/File/operation/getFileVersions)\n* Add a paginated response variant to [file versions listing](#tag/File/operation/getFileVersions)\n* Fetch multiple entities by UID at [Sections/entities](#tag/Entity/operation/getEntities)\n* [Duplication of entities](#tag/Entity/operation/duplicateEntities)\n* Add a paginated response variant to [related entities listing](#tag/Entity/operation/getEntityRelatedItems)\n\n### 2025.05.26 - 2.0.58\n* Add operationId to all paths\n\n### 2025.04.17 - 2.0.57\n* Add method property to resolution workflow audit trail data property\n\n### 2025.04.06 - 2.0.56\n* Add 2 new paths for fetching tags, add pagination and sorting to existing tag listing\n  * [Get only root tags](#tag/Tag/operation/getRootTags) \n  * [Get sub-tags](#tag/Tag/operation/getSubTags) \n* Add [Search entities](#tag/Search/operation/searchEntities) endpoint\n\n### 2025.04.02 - 2.0.55\n* Add [resolutions](#tag/Resolution) and [workflows](#tag/Workflow)\n* Add resolutionSupport extendable property to Entity\n\n### 2025.03.27 - 2.0.54\n* Add `options` as an expandable field to Meta\n\n### 2025.03.26 - 2.0.53\n* Add [entities by tag](#tag/Entity/operation/getEntitiesByTag) endpoint\n\n### 2025.02.03 - 2.0.52\n* Add more granular permissions for account sharing\n\n### 2025.01.20 - 2.0.51\n* Add `recurrence` property to reminders\n\n### 2025.01.17 - 2.0.50\n* Add `time` property to file lock requests for custom lock duration\n\n### 2024.12.09 - 2.0.49\n* Add `source` field to retention for customizing the source attribute for calculating the retention end time\n\n### 2024.11.13 - 2.0.48\n* Add `accountWatermarking` audit trail event\n\n### 2024.11.13 - 2.0.47\n* Add `timeFormat` as expandable field to User\n\n### 2024.10.25 - 2.0.46\n* Added comment field for workflow responses in audit trail\n\n### 2024.10.10 - 2.0.45\n* Added accountTeamUserManagedInvite, accountTeamUserManagedInviteDelete, accountTeamUserManagedAccept and accountTeamUserManagedReject audit trail events\n\n### 2024.09.17 - 2.0.44\n* Deprecate Account file report [`GET /v2/accounts/{accountUid}/reports/file-list`](#tag/File/operation/getAccountFileReport)\n\n### 2024.09.10 - 2.0.43\n* Meta of type `float` is renamed from Float to Decimal, type field stays the same for compatibility.  \n  Value is represented as a string for compatibility with higher precisions and larger values.\n* Change asic entity type text representation from `asic` to `file`\n* Add prefix and wildcard search operators for meta filters\n\n### 2024.09.02 - 2.0.42\n* Add `language` to the composable filter of search\n\n### 2024.09.02 - 2.0.41\n* Add an expandable field `activeUser` to audit trails. Present, when a substitute user performed the action.\n\n### 2024.07.26 - 2.0.40\n* File and folder retention audit events contain no `data` property any more on removal of retention\n* Add `cause` to audit trails to mark actions performed by background processes. Initially the only option is `retention`.\n* Add all entities listing endpoint: [`GET /v2/accounts/{accountUid}/entities/all`](#tag/Entity/operation/getAllEntities)\n\n### 2024.06.14 - 2.0.39\n* Mark inbox and team folders as nullable fields for Account\n\n### 2024.05.27 - 2.0.38\n* Fix Audit trail sync-log id field value\n* Add `sort` and `viewType` expandable fields to Folder\n\n### 2024.05.23 - 2.0.37\n* Search: add `uid` to queryFilter list \n\n### 2024.04.26 - 2.0.36\n* Add `visibleColumnsWithMeta` as expandable field to Folder to get meta columns with names\n\n### 2024.04.18 - 2.0.35\n* Add `remoteUsername` as expandable field to Team user\n\n### 2024.04.16 - 2.0.34\n* Add redirect Location url in content as well\n* Add `creator` as expandable field to Entity\n* Include response samples with all expanded fields.  \n  Note: It is recommended to ask for as few fields as is necessary as there are optimizations in place in the background for generating responses. This goes for both default fields and extra related data using expand option. For example, when requesting for all entities under a parent with tags, meta etc, if You don't need to have permissions for each related piece, do not request for them. A sample get param would be: `?fields=uid,name,tags.uid,tags.name,meta.meta.uid,meta.value&expand=tags,meta:myMetaUid,meta:myOtherMetaUid`\n\n### 2024.04.11 - 2.0.33\n* Add sorting to entities by parent endpoint: [`GET /v2/accounts/{accountUid}/entities/{entityUid}/entities`](#tag/Entity/operation/getEntitiesByParent)\n* Add `extension` as expandable field to Entity\n* Add `size` as expandable field to Entity\n\n### 2024.04.10 - 2.0.32\n* Update folder column attribute options list\n* Add `tags` as expandable field to Entity\n* Add `dateFormat` as expandable field to User\n\n### 2024.03.20 - 2.0.31\n* Add `meta:UID` expand field to entities\n\n### 2024.03.18 - 2.0.30\n* Get a list of parents for an entity: [`GET /v2/accounts/{accountUid}/entities/{entityUid}/parents`](#tag/Entity/operation/getEntityParents)\n* Add isRoot property to entity\n\n### 2024.03.11 - 2.0.29\n* Add sectionOrder property to entity and folder models (applicable to only root entities/sections)\n* Add folderStats property to entity and folder models\n* Add inboxFolder and teamFolder properties to entity and folder models\n\n### 2024.01.09 - 2.0.28\n* Add account as an expandable relation to Entity\n\n### 2023.11.24 - 2.0.27\n* Add highlight expand field for search results\n\n### 2023.11.22 - 2.0.26\n* Add `version` expandable field to `File` objects\n\n### 2023.10.30 - 2.0.25\n* Add fileUpdateContent and fileUpdateOnline permissions to file\n* Add canShareCustomPermissions to Account permissions list\n  * Without this permission, You can only set the role property for a share, no settings\n\n### 2023.10.22 - 2.0.24\n* Add endpoints for getting shares to a specific user\n  * Get direct shares to a specific user: [`GET /v2/accounts/{accountUid}/users/{userUid}/shares`](#tag/Share/operation/getUserShares)\n  * Get all shares (including through group memberships) accessible by a specific user: [`GET /v2/accounts/{accountUid}/users/{userUid}/access`](#tag/Share/operation/getAllUserShares)\n* Add documentation for fetching share info: [`GET /v2/accounts/{accountUid}/shares/{shareUid}`](#tag/Share/operation/getShare)\n* Add settings property to shares\n\n### 2023.10.18 - 2.0.23\n* Add missing endpoint documentation for tag sharing\n  * Get tag shares: [`GET /v2/accounts/{accountUid}/tags/{tagUid}/shares`](#tag/Tag/operation/getTagShares)\n  * Share a tag: [`POST /v2/accounts/{accountUid}/tags/{tagUid}/shares`](#tag/Tag/operation/addTagShares)\n\n### 2023.10.18 - 2.0.22\n* Add group expand parameters to doc\n\n### 2023.09.20 - 2.0.21\n* Add composable filter and scoring option to file/folder searches\n  * *filter* property can contain a nested set of familiar filters to create a required composite set of filters\n  * *scoring* property is used to force scoring even when we're not doing search by query directly (only filtering)  \n    Scoring results are not guaranteed to be sensible\n\n### 2023.09.19 - 2.0.20\n* Added fileOnlineView and fileOnlineEdit audit trail events\n\n### 2023.09.14 - 2.0.19\n* Sections list is now available for partially accessible accounts, canGetSections property indicates that all sections are guaranteed to be accessible\n* Share items to user by userUid\n\n### 2023.09.03 - 2.0.18\n* Enable moving tags around\n\n### 2023.08.30 - 2.0.17\n* Add `isUsed` attribute to Meta Select Option\n* Add tag management to entities for a single point to manage tags for all types of entities\n* Tag sharing\n* Add tagUid filter to file/folder search endpoints\n\n### 2023.08.10 - 2.0.16\n* Add searchAfter field to file/folder search endpoints for paging over more than 10000 results.\n\n### 2023.07.31 - 2.0.15\n* Add sorting to file/folder search endpoints\n\n### 2023.03.05 - 2.0.14\n* Reminders for all types of entities\n  * Added two endpoints, one specifically for folders, other for any type of entity\n  * Folders: [`GET /v2/accounts/{accountUid}/folders/{folderUid}/reminders`](#tag/Reminder/operation/getFolderReminders)\n  * Entities: [`GET /v2/accounts/{accountUid}/entities/{entityUid}/reminders`](#tag/Reminder/operation/getEntityReminders)\n* Related items to all types of entities of all types  \n  * Added two endpoints, one specifically for folders, other for any type of entity\n  * Folders: [`GET /v2/accounts/{accountUid}/folders/{folderUid}/related`](#tag/Folder/operation/getFolderRelatedItems)\n  * Entities: [`GET /v2/accounts/{accountUid}/entities/{entityUid}/related`](#tag/Entity/operation/getEntityRelatedItems)\n* Meta for all items, new endpoint is under entities: [`GET /v2/accounts/{accountUid}/entities/{entityUid}/meta`](#tag/Entity/operation/getEntityMeta)\n\n### 2023.02.21 - 2.0.13\n* Add new request header `X-Folderit-Request-Key` to make it possible to differentiate audit trails resulting from your own requests\n* Add audit trail endpoint tailored for file syncing: [`GET /v2/accounts/{accountUid}/audit/syncLog`](#tag/Audit/operation/getFileSyncLog)\n* Add `extra` field to the expand list of folder and entity, which gives access to number, note, date etc.\n* Add `extra` field to folder and entity update endpoints\n\n### 2023.01.23 - 2.0.12\n* Add includeFiles, includeLinks and includeFolders fields for FolderMeta\n\n### 2022.07.22 - 2.0.11\n* Add groups as group members ([GET group all members](#operation/getGroupMembers))\n* Add [Entity endpoint](#tag/Entity) for a unified access to directory structure (access to all types of entities like folders, files, links and more in the future)\n\n### 2022.04.13 - 2.0.10\n* Add `fields` and `expand` query parameters to paths resulting in accounts, folders and files\n  * `fields` parameter can be used to reduce amount of data returned. For example: `fields=uid,name`\n  * `expand` parameter can be used to fetch related objects with the request, for example fetching meta with a file list.\n    * [`GET /v2/accounts/{accountUid}/folders/{folderUid}/files?expand=meta,people,tags`](#tag/Folder/operation/getFilesByParent) includes meta, people and tags arrays with each file\n  * `expand` and `fields` can be combined to get all fields of the initial object, but only a few from a related object:\n    * `fields=*,meta.value,meta.meta.name&expand=meta`\n* Search result updates for autocomplete [`GET /v2/accounts/{accountUid}/search/simple`](#tag/Search/operation/searchAutocomplete) and [`GET /v2/accounts/{accountUid}/search/files`](#tag/Search/operation/searchFiles):\n  * Mark file search result pathUid property as deprecated\n  * Add mimeType property to file search results\n\n### 2022.04.06 - 2.0.9\n* Add email as a required field for signing up team users via [`POST /v2/accounts/{accountUid}/team-users`](#tag/Account/operation/addTeamUser)\n\n### 2022.04.02 - 2.0.8\n* Add new audit events\n  * fileDuplicate\n  * folderDuplicate\n  * folderSubfileDuplicate\n  * folderSubfolderDuplicate\n  * accountSectionDuplicate\n* Add userUid and groupUid to Audit Trail Share data\n* Audit trail fileDownload events now have fileVersionUid data\n\n### 2022.02.23 - 2.0.7\n* Add folder import emails (mailInAddress)\n  * Activate an address for importing mails to any folder (in contrast to Inbox section, which always has a static address)\n    * Activate address: [`POST /v2/accounts/{accountUid}/folders/{folderUid}/email`](#tag/Folder/operation/configureFolderEmail)\n    * Deactivate existing address: [`DELETE /v2/accounts/{accountUid}/folders/{folderUid}/email`](#tag/Folder/operation/deleteFolderEmail)\n    * Reset (active or deleted) address to get a new random key: [`PUT /v2/accounts/{accountUid}/folders/{folderUid}/email`](#tag/Folder/operation/requestNewFolderEmailAddress)\n  * If You prefer to only use POST requests, use `action` parameter in request body\n\n### 2022.02.13 - 2.0.6\n* Add dateFrom and dateTo filters for file search\n* Add file report [`GET /v2/accounts/{accountUid}/reports/file-list`](#tag/File/operation/getAccountFileReport)\n\n### 2022.01.24 - 2.0.5\n* Add new audit event: fileResolutionDelete\n\n### 2022.01.22 - 2.0.4\n* Adjusted field names in error responses to correct names\n\n### 2022.01.16 - 2.0.3\n* Added pagination\n  * [`GET /v2/accounts/{accountUid}/folders/{folderUid}/folders`](#tag/Folder/operation/getFolderByParent)\n  * [`GET /v2/accounts/{accountUid}/recycle-bin/folders`](#tag/Folder/operation/getRecycledFolders)\n  * [`GET /v2/accounts/{accountUid}/recycle-bin/files`](#tag/File/operation/getRecycledFiles)\n\n### 2022.01.14 - 2.0.2\n* Fix Folder visibleColumns meta column spec\n\n### 2022.01.14 - 2.0.1\n* Added `page-size` parameter to paths that already had `page` parameter\n  * [`GET /v2/accounts/{accountUid}/audit/accountLog`](#tag/Audit/operation/getAccountRecentAuditTrail)\n  * [`GET /v2/accounts/{accountUid}/audit`](#tag/Audit/operation/getAccountAuditTrail)\n  * [`GET /v2/accounts/{accountUid}/files/{fileUid}/audit`](#tag/Audit/operation/getFileAuditTrail)\n  * [`GET /v2/accounts/{accountUid}/folders/{folderUid}/audit`](#tag/Audit/operation/getFolderAuditTrail)\n  * [`GET /v2/accounts/{accountUid}/groups`](#tag/Group/operation/getGroups)\n* Added pagination\n  * [`GET /v2/accounts/{accountUid}/folders/{folderUid}/files`](#tag/File/operation/getFilesByParent)\n* Added missing pagination documentation\n  * [`GET /v2/accounts/{accountUid}/groups/{groupUid}/users`](#tag/Group/operation/getGroupUsers)\n\n### 2021.12.19 - 2.0.0\nAPI v2 comes with multiple breaking changes. Most notably:\n* Removed any reference to object `ID`s. Instead we are now using `UID`s. UIDs are globally unique and have a data type of CHAR(10)\n* Paths now include `accountUid` as required parameter\n* `accountId` paramater has been removed from request body parameters as `accountUid` is now always part of the path parameters for Account-related requests\n* New tags and people/signees can be created directly without attaching them to a file from [`POST /v2/accounts/{accountUid}/tags`](#tag/Tag/operation/addTag) and [`POST /v2/accounts/{accountUid}/people`](#tag/Person/operation/addPerson)\n* Removed deprecated paths and parameters\n\n#### New features\n* Audit trail: added new tag and person/signee events on Account level\n  * tagNew\n  * tagDelete\n  * tagName\n  * signeeNew\n  * signeeDelete\n  * signeeName\n* Search\n  * Added queryFilter options to File search\n    * number\n    * mailSubject\n    * mailSenderEmail\n    * mailSenderName\n    * mailContent\n  * Added filter fields to File search\n    * number\n    * mailSubject\n    * mailSenderEmail\n    * mailSenderName\n    * mailContent\n\n#### Detailed changes to paths:\n* Removed paths:\n  * /files\n  * /files/{fileId}\n  * /folders\n  * /folders/{folderId}\n  * /accounts/{accountId}/recycle-bin\n  * /meta/{metaId}\n  * /files/search\n  * /folders/search\n  * /download\n  * /audit/files/{fileId}\n  * /audit/folders/{folderId}\n* New paths:\n  * /v2/accounts/{accountUid}/files/{fileUid}/preview\n  * /v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}/download\n* Changed paths:\n  * /files/upload -> /v2/accounts/{accountUid}/files/upload\n  * /files/single/{fileId} -> /v2/accounts/{accountUid}/files/{fileUid}\n  * /files/{fileId}/permissions -> /v2/accounts/{accountUid}/files/{fileUid}/permissions\n  * /files/{fileId}/lock -> /v2/accounts/{accountUid}/files/{fileUid}/lock\n  * /files/{fileId}/unlock -> /v2/accounts/{accountUid}/files/{fileUid}/unlock\n  * /files/{fileId}/related -> /v2/accounts/{accountUid}/files/{fileUid}/related\n  * /files/{fileId}/restore -> /v2/accounts/{accountUid}/files/{fileUid}/restore\n  * /files/{fileId}/purge -> /v2/accounts/{accountUid}/files/{fileUid}/purge\n  * /files/{fileId}/versions -> /v2/accounts/{accountUid}/files/{fileUid}/versions\n  * /files/{fileId}/versions/{fileVersionId} -> /v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}\n  * /files/download/{fileId} -> /v2/accounts/{accountUid}/files/{fileUid}/download\n  * /files/versions/{fileVersionId}/preview -> /v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}/preview\n  * /files/{fileId}/unpack -> /v2/accounts/{accountUid}/files/{fileUid}/unpack\n  * /files/unpack-status/{key} -> /v2/accounts/{accountUid}/unpack/status/{key}\n  * /files/unpack-check -> /v2/accounts/{accountUid}/unpack/check\n  * /files/languages -> /v2/accounts/{accountUid}/document-languages\n  * /folders/single/{folderId} -> /v2/accounts/{accountUid}/folders/{folderUid}\n  * /files/people/{personId} -> /v2/accounts/{accountUid}/people/{personUid}\n  * /files/people/{personId}/permissions -> /v2/accounts/{accountUid}/people/{personUid}/permissions\n  * /folders/{folderId}/files -> /v2/accounts/{accountUid}/folders/{folderUid}/files\n  * /folders/single/{folderId} -> /v2/accounts/{accountUid}/folders/{folderUid}\n  * /folders/{folderId}/permissions -> /v2/accounts/{accountUid}/folders/{folderUid}/permissions\n  * /folders/{folderId}/folders -> /v2/accounts/{accountUid}/folders/{folderUid}/folders\n  * /folders/{folderId}/restore -> /v2/accounts/{accountUid}/folders/{folderUid}/restore\n  * /folders/{folderId}/purge -> /v2/accounts/{accountUid}/folders/{folderUid}/purge\n  * /groups/{groupId} -> /v2/accounts/{accountUid}/groups/{groupUid}\n  * /groups/{groupId}/permissions -> /v2/accounts/{accountUid}/groups/{groupUid}/permissions\n  * /groups/{groupId}/shares -> /v2/accounts/{accountUid}/groups/{groupUid}/shares\n  * /groups/{groupId}/users -> /v2/accounts/{accountUid}/groups/{groupUid}/users\n  * /groups/{groupId}/users/{userId} -> /v2/accounts/{accountUid}/groups/{groupUid}/users/{userUid}\n  * /groups/{groupId}/users/{userId}/permissions -> /v2/accounts/{accountUid}/groups/{groupUid}/users/{userUid}/permissions\n  * /meta/{metaId}/permissions -> /v2/accounts/{accountUid}/meta/{metaUid}/permissions\n  * /files/{fileId}/meta -> /v2/accounts/{accountUid}/files/{fileUid}/meta\n  * /files/{fileId}/meta/{metaId} -> /v2/accounts/{accountUid}/files/{fileUid}/meta/{metaUid}\n  * /files/{fileId}/meta/active -> /v2/accounts/{accountUid}/files/{fileUid}/active-meta\n  * /folders/{folderId}/meta -> /v2/accounts/{accountUid}/folders/{folderUid}/meta\n  * /folders/{folderId}/meta/{metaId} -> /v2/accounts/{accountUid}/folders/{folderUid}/meta/{metaUid}\n  * /folders/{folderId}/meta/active -> /v2/accounts/{accountUid}/folders/{folderUid}/active-meta\n  * /files/people/{personId} -> /v2/accounts/{accountUid}/people/{personUid}\n  * /files/people/{personId}/permissions -> /v2/accounts/{accountUid}/people/{personUid}/permissions\n  * /files/{fileId}/people -> /v2/accounts/{accountUid}/files/{fileUid}/people\n  * /files/{fileId}/people/{personId} -> /v2/accounts/{accountUid}/files/{fileUid}/people/{personUid}\n  * /files/reminders/{reminderId} -> /v2/accounts/{accountUid}/reminders/{reminderUid}\n  * /files/{fileId}/reminders -> /v2/accounts/{accountUid}/files/{fileUid}/reminders\n  * /search/extensions -> /v2/accounts/{accountUid}/search/extensions\n  * /search/files -> /v2/accounts/{accountUid}/search/files\n  * /search/folders -> /v2/accounts/{accountUid}/search/folders\n  * /search/simple -> /v2/accounts/{accountUid}/search/simple\n  * /shares/{shareId} -> /v2/accounts/{accountUid}/shares/{shareUid}\n  * /shares/{shareId}/permissions -> /v2/accounts/{accountUid}/shares/{shareUid}/permissions\n  * /files/{fileId}/shares -> /v2/accounts/{accountUid}/files/{fileUid}/shares\n  * /folders/{folderId}/shares -> /v2/accounts/{accountUid}/folders/{folderUid}/shares\n  * /files/tags/{tagId} -> /v2/accounts/{accountUid}/tags/{tagUid}\n  * /files/tags/{tagId}/permissions -> /v2/accounts/{accountUid}/tags/{tagUid}/permissions\n  * /files/{fileId}/tags -> /v2/accounts/{accountUid}/files/{fileUid}/tags\n  * /files/{fileId}/tags/{tagId} -> /v2/accounts/{accountUid}/files/{fileUid}/tags/{tagUid}\n  * /audit/accountLog/{accountId} -> /v2/accounts/{accountUid}/audit/accountLog\n  * /files/{fileId}/audit -> /v2/accounts/{accountUid}/files/{fileUid}/audit\n  * /folders/{folderId}/audit -> /v2/accounts/{accountUid}/folders/{folderUid}/audit\n"
+- name: production
+  data:
+    default: https://api.folderit.com
+    authserver: https://auth.folderit.com/.well-known
+    authserver1: https://auth.folderit.com/oauth2
+  _type: environment
+  _id: env_edec35458d8e4cb298d76316dd554096
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+- name: User
+  _type: request_group
+  _id: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: User-related operations
+- name: Account
+  _type: request_group
+  _id: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Account-related operations
+- name: Entity
+  _type: request_group
+  _id: fld_30fd42642d7b4861bcce53d3c4ecef79
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Entity-related operations
+- name: Folder
+  _type: request_group
+  _id: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Folder-related operations
+- name: File
+  _type: request_group
+  _id: fld_c47a3996e3014a44a110e729e490af40
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: File-related operators
+- name: Meta
+  _type: request_group
+  _id: fld_d8513278f2484942b8b316793e02d992
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Meta-related operations
+- name: Tag
+  _type: request_group
+  _id: fld_cabc89ed959e4efeafea66540a43879a
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Tag-related operations
+- name: Person
+  _type: request_group
+  _id: fld_ba4c1039e74e449d8e70426cfeb5f092
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Person-related operations
+- name: Reminder
+  _type: request_group
+  _id: fld_15d5523a1fe34cc596522c2690f83e1a
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Reminder-related operations
+- name: Resolution
+  _type: request_group
+  _id: fld_67f80545b0d64058ac1fe4565252b615
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Resolution-related operations
+- name: Workflow
+  _type: request_group
+  _id: fld_2089ee5c7e9e4584bf78418285798385
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Workflow-related operations
+- name: Share
+  _type: request_group
+  _id: fld_842052808dbd42f393557a5ec53bbda7
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Share-related operations
+- name: Group
+  _type: request_group
+  _id: fld_35ce3de081bf46eabfff4d8ac62bf015
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Group-related operations
+- name: Plan
+  _type: request_group
+  _id: fld_fa9e64952f1b40a580a4a726fb6db192
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Plan-related operations
+- name: Search
+  _type: request_group
+  _id: fld_ff5b9dcbe37b414b9c32e611149e5415
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Search-related operations
+- name: Audit
+  _type: request_group
+  _id: fld_081da3171457417eb9fe3cca50f52778
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Audit-related operations
+- name: Permission
+  _type: request_group
+  _id: fld_eec6893d6d94459f89887f8608bc6390
+  parentId: wrk_8301381bda164f36b2bfeebee3b4197c
+  description: Permission-related operations
+- name: getUser
+  method: GET
+  url: '{{default}}/v2/user'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["dateFormat"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5e3a23de70f7423dad688828cc7a8291
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: Returns user details
+- name: editUser
+  method: PUT
+  url: '{{default}}/v2/user'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "title": "Mr.",
+        "firstName": "John",
+        "lastName": "Smith",
+        "phone": "+123 456 7890",
+        "locale": "en-GB",
+        "timezone": "Europe/London"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["dateFormat"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_608c6a6d24cf411e9b5f2df6b85e5b9a
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: editUserBilling
+  method: PUT
+  url: '{{default}}/v2/user/billing'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "userType": "private",
+        "address": "Street name 10",
+        "zip": "12345",
+        "city": "City name",
+        "state": "State name",
+        "countryCode": "20",
+        "name": "name21"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4c020b991a2949778a2ba42a08c82017
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getSupportedCountries
+  method: GET
+  url: '{{default}}/v2/user/countries'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5198b375573d4047b8c81d75200efa47
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getSupportCountriesInLocale
+  method: GET
+  url: '{{default}}/v2/user/countries/{locale}'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4cc6fd911ca345868f47be079fd21362
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getSupportedLocales
+  method: GET
+  url: '{{default}}/v2/user/locales'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5d8cfec9798a40279f9b1b117519f6b6
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getUserPermissions
+  method: GET
+  url: '{{default}}/v2/user/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_16d9e674dc9441ddbc5977131d767cc5
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: signupUser
+  method: POST
+  url: '{{default}}/v2/users'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "email": "someEmail@foo.bar",
+        "companyName": "My company name",
+        "countryCode": "13",
+        "phone": "+123 456 7890",
+        "address": "Street name 10",
+        "zip": "12345",
+        "city": "City name",
+        "state": "State name",
+        "taxNo": "EE123456789",
+        "registerNo": "12345678",
+        "title": "Mr.",
+        "firstName": "John",
+        "lastName": "Smith",
+        "planId": 10,
+        "locale": "en-GB",
+        "timezone": "Europe/London",
+        "options": [
+          {
+            "action": "action56"
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-22
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_159ed922fe5f45938015e019bc203639
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getUserByUid
+  method: GET
+  url: '{{default}}/v2/users/{userUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_177e2d4ae95f422b8b4b5714021a7270
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getUserShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/users/{userUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: cursor
+    value: cursor2
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_49e2d0d327de434780f299dac7f37ce9
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: ''
+- name: getAllUserShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/users/{userUid}/access'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: cursor
+    value: cursor60
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_67694499ce334df99b8cdb543b498f6c
+  parentId: fld_c918ab2fbd624c239d8a3cd8804c3be7
+  description: All shares (including through groups) accessible by an user
+- name: getTeamUsers
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/team-users'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["remoteUsername"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '100'
+    disabled: false
+  - name: sort
+    value: '["sort47"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cc44f380e802408d90c81ab9c210162c
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: addTeamUser
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/team-users'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "userUid": "Abc_123-XY",
+        "email": "someEmail@foo.bar"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["remoteUsername"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-25
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_47ee5515cb33451a8ece51ec6e038890
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getTeamUser
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/team-users/{userUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["remoteUsername"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_70caeff9267540f3867c44b2011a8c8d
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getAccounts
+  method: GET
+  url: '{{default}}/v2/accounts'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_74877d4a97cb4120aa3db1d7022134a2
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: Returns available accounts
+- name: createAccount
+  method: POST
+  url: '{{default}}/v2/accounts'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "Account name",
+        "indexing": true,
+        "language": "eng"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f59690acdf0e4a4ba0f91b89076103d1
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getAccount
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_686ad7336bef42668fed10556bef5215
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: updateAccount
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "Account name",
+        "indexing": true,
+        "language": "eng",
+        "applyLanguageRecursive": false,
+        "applyLanguageFiles": true,
+        "applyLanguageFolders": false
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_048681048e31469baef74fa370e59398
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: deleteAccount
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_18ad9f679145456786c0af55c540f207
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getAccountPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3e53bac7aa294abe92bf78731e7c1d0d
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getAccountUsers
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/users'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b4e66438ab9e4c8f8fbfd39cfeda3dcb
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getAccountUser
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/users/{userUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-39
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9c1d18beaaaf460faaea96c97efaa28a
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: updateAccountUser
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/users/{userUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "position": "position64"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-71
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_841339ef8ac34d17983246b87d91cac5
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: deleteAccountUser
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/users/{userUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-40
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_37c4e827f9a943f6b0f7776820792572
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: getSectionOrder
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/section-order'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b962028e4b3c4cd2923dd479dd10f2e4
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: ''
+- name: updateSectionOrder
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/section-order'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        "body6"
+      ]
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-92
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_10c7f98e94fc4d22a7685f8cac0bde42
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: Unlisted sections will be ordered by name after listed sections
+- name: downloadFilesAndFoldersBundle
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/download'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-F9
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_60e2bb9423c9404f8fe276a30dad0bb9
+  parentId: fld_87dbc81fad1e4d598ca6efea334e9bfe
+  description: "To download whole account, omit files and folders properties  \nAlternatively, POST request is also supported\n"
+- name: getEntities
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["sort5"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_31f91dc6a12e4e79950f416f78d2877b
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getEntity
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_55213667d0794025b30c80fbef741195
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: updateEntity
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My entity name",
+        "parentUid": "parentUi68",
+        "retention": {
+          "time": "1m5d",
+          "action": "delete",
+          "isRecursive": true,
+          "target": "Abc_123-XY",
+          "keepStructure": false,
+          "source": "createdAt"
+        },
+        "retentionEnd": {
+          "end": 1537177837,
+          "action": "purge",
+          "target": "Abc_123-XY"
+        },
+        "extra": {
+          "number": "number33",
+          "note": "note10",
+          "date": "21-11-2025",
+          "dueDate": "21-09-2025"
+        },
+        "sectionOrder": 0
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-51
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock20
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7c3044583d814d22ad7d7ca70366f9ac
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: deleteEntity
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-17
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock71
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2af4f5cc89ee457196089622407b62d8
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getEntitiesByParent
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/entities'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  - name: sort
+    value: '["date","name","-created_at"]'
+    disabled: false
+  - name: sort-folders-first
+    value: 'true'
+    disabled: false
+  - name: extension
+    value: png
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c223d6dc45f44a73b35bc30f53e662bc
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getAllEntities
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/all'
+  parameters:
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: cursor
+    value: cursor86
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  - name: folders
+    value: '1'
+    disabled: false
+  - name: files
+    value: '1'
+    disabled: false
+  - name: parentUid
+    value: Abc_123-XY
+    disabled: false
+  - name: extension
+    value: png
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f03bd73fd32b46069151a756949f0cf6
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getEntityParents
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/parents'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_28cd99ba1fa7402d899b696a672e02a2
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getEntityRelatedItems
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/related'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort23"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination20
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4fa065dd14e74910820faeaabe376d45
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: addEntityRelatedItem
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-33
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock40
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_634dffaa25404f64ae7f89b2656dbd77
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: deleteEntityRelatedItem
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-72
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock25
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b3883c68fddd4a748b77ce9127ca86e6
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: restoreEntity
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/restore'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "parentUid": "parentUi72"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-93
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f46104ff956c4360b0e834ddcd93f83d
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: deleteEntityPermanently
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/purge'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-59
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ec6df934b2e945ab8f629608ef4daa30
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: duplicateEntities
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/action/duplicate'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entities": [
+          "entities31"
+        ],
+        "locationUid": "locationUid85",
+        "options": {
+          "filePeople": true,
+          "files": true,
+          "meta": true,
+          "relations": false,
+          "reminders": false,
+          "resolutions": false,
+          "shares": false,
+          "tags": true,
+          "workflows": false
+        }
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-11
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f451c475615e496ca012dba387ec95d7
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getDuplicationStatus
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/action/duplicate/{statusKey}'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4b0420b46ea8427286649812d4c4b900
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getRecycledEntities
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/recycle-bin'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  - name: parentUid
+    value: Abc_123-XY
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d779ace05cc04ac2a3e85c7ceca7b087
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: emptyRecycleBin
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/recycle-bin'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9ec1ed9153334e1baa933bcfc410d6e6
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: Purge all entities from the recycle bin
+- name: getSharedEntities
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/shared-entities'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_6723d0742d1842b79693ab63677955c8
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getEntitiesByTag
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}/entities'
+  parameters:
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: cursor
+    value: cursor91
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags","extension","meta:abcde12345","file.version"]'
+    disabled: false
+  - name: extension
+    value: png
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2445a09008024147bf21d7a4d6a30c71
+  parentId: fld_30fd42642d7b4861bcce53d3c4ecef79
+  description: ''
+- name: getFilesByParent
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/files'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_1dd64bdbb9d7444aa11405e1c39a833f
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getAccountFileReport
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/reports/file-list'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: limit
+    value: '10000'
+    disabled: false
+  - name: last
+    value: Abc_123-XY
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e83782cb8614442cbaa040f5590c76d6
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: Use [`GET /v2/accounts/{accountUid}/entities/all`](#tag/Entity/operation/getAllEntities) instead
+- name: getFolders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_6a3b312e28514836a2b3cf957fb8f622
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: createFolder
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My folder name",
+        "visibleColumns": [
+          {
+            "field": "language"
+          },
+          {
+            "field": "language"
+          },
+          {
+            "field": "language"
+          }
+        ],
+        "language": "eng"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-74
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d5248577453e4e5b9715befe7e1a7dbf
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getFolder
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f90a670bff1241658a8e483a3c4b6c31
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: updateFolder
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My folder name",
+        "parentUid": "parentUi29",
+        "visibleColumns": [
+          {
+            "field": "language"
+          },
+          {
+            "field": "language"
+          },
+          {
+            "field": "language"
+          }
+        ],
+        "retention": {
+          "time": "1m5d",
+          "action": "delete",
+          "isRecursive": true,
+          "target": "Abc_123-XY",
+          "keepStructure": false,
+          "source": "createdAt"
+        },
+        "extra": {
+          "number": "number33",
+          "note": "note10",
+          "date": "21-11-2025",
+          "dueDate": "21-09-2025"
+        },
+        "sectionOrder": 0,
+        "sort": "name",
+        "viewType": "list"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-76
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_44d9b3c9436e43dab8265ff4dd22b098
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: deleteFolder
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-F0
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_244015772ac94ed58965034583533ca8
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: configureFolderEmail
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/email'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "action": "activate"
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-73
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e5297edb4e244635b98c282248689d27
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: Request body is optional, action defaults to `activate`
+- name: deleteFolderEmail
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/email'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-83
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ed8969adb0e14831b3281e33a2b61b16
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: requestNewFolderEmailAddress
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/email'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-11
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ff91300eb5874be6ba8b1d7216a6f1a5
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getFolderPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ca4660d858d84026a3017b39c526d194
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getFolderByParent
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/folders'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_fec8d5ebe21546289bc5e45e580344ba
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getFolderRelatedItems
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/related'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_719cec4bd7cb45b796ac46828f652022
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: addFolderRelatedItem
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-F8
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8ec6c719e86240ae8a32a015bfb657e2
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: deleteFolderRelatedItem
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-36
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_45a3f71db787478e86aece4607075873
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: restoreFolder
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/restore'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "parentUid": "parentUi35"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-69
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_af493cd82fb54a3f94474402f6cefe76
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: deleteFolderPermanently
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/purge'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-69
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f41857ad8e434f7caf86826ba0e8001b
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getRecycledFolders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/recycle-bin/folders'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent","meta"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ba0e411ff352412b8d64aced48d326f9
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: getSharedFilesAndFolders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/shared-items'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_28433e98ebff41aea4a2a27509ce399f
+  parentId: fld_77f2a2a11c9d437cbe3feb6351f5747a
+  description: ''
+- name: uploadFile
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/upload'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "action": "create",
+        "fileSize": 3270535524169.4893,
+        "fileName": "fileName20",
+        "contentType": "contentType53",
+        "folderUid": "Abc_123-XY",
+        "parts": {}
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-23
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock71
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7762f9d489584d72b9e62cdd82dce8f8
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFile
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["meta"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_1f6be291a09e426f89d18b2aeeae3cb4
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: updateFile
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My entity name",
+        "date": "15-10-2025",
+        "dueDate": "09-10-2025",
+        "note": "note81",
+        "number": "number81",
+        "versionUid": "Abc_123-XY",
+        "folderUid": "Abc_123-XY",
+        "retentionEnd": {
+          "end": 1537177837,
+          "action": "purge",
+          "target": "Abc_123-XY"
+        }
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["meta"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-70
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock33
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2808d78f4a584fd49b24f49dc3848390
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: deleteFile
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-55
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock1
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c7e31b8c8cfa455baf5020cdd560ee39
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFilePermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cbcb6ff2191943beb99abc080766c142
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: lockFilePost
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/lock'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "time": 36,
+        "lockId": "lockId76"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-29
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_fb0b3c9294f648a298c315fed963eeb9
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: lockFilePut
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/lock'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "time": 36,
+        "lockId": "lockId76"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["parent"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-98
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_02c0c334c3e9408da576066c290636c5
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: unlockFile
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/lock'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-67
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_251b6beb37ed41f4a07e8794d838b402
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: unlockFile2
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/unlock'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "lockId": "lockId94"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["meta"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-31
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_24e62ad7ec8d41cfb8fb957fcec98dad
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFileRelatedItems
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/related'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8ab54fcfaa1a459e84ea7c620f6b6d76
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: addFileRelatedItem
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "fileUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-27
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock10
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0a47448b5721420181776d11c345ec71
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: deleteFileRelatedItem
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/related'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "fileUid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-56
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock87
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e9ce18f5ac0e486ab3562add120fc0e8
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: restoreFile
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/restore'
+  body:
+    mimeType: application/json
+    text: '{}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["fileRelations"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-81
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_dea61d1841ae493cb38d708f92e13a72
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: deleteFilePermanently
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/purge'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["tags"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-72
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_1495d68de4b54532ad5f313ab534b204
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFileVersions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/versions'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort86"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination65
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5a0e8f2f31604d68b6c8cd07eebd8312
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: deleteFileVersion
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-53
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock75
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_aea826d761fc4d23abd5062533a953a6
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFileDownloadUrl
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/download'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-52
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3d187c74b422459481fe39d15eccade3
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFileVersionDownloadUrl
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}/download'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-51
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a8aa2971b5ae4414b217e7d8d0549216
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFilePreviewDownloadUrl
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/preview'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-11
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8af3b55a526e44fc867a0e7868953721
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getFileVersionPreviewDownloadUrl
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/versions/{fileVersionUid}/preview'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-86
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c848459ce1894e17b45a4effd3448978
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getRecycledFiles
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/recycle-bin/files'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5573910df85846f2b0cf7122eac02333
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: unpackArchiveFile
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/unpack'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "overwrite": false,
+        "newFolder": true
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-37
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_39e945fbaf6c455fbe967688c6123de8
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: After initiating unpacking, check status with received key
+- name: getUnpackStatus
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/unpack/status/{key}'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0217f44b03444ecf8f1099ab22efc4a9
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: checkUnpackSupport
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/unpack/check'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "test.zip"
+      }
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0a5881d5ded945a3bd819b58ec006f13
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: Send a filename to check if system supports unpacking it
+- name: getDocumentOcrLanguages
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/document-languages'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_198290cdb81d4289b0aa9449ef745542
+  parentId: fld_c47a3996e3014a44a110e729e490af40
+  description: ''
+- name: getMetas
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_64c849e156b94452b275f80077c10de9
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: addMeta
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/meta'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "meta name",
+        "description": "description98",
+        "type": "string",
+        "multiple": false
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-27
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4d2c45f7081c4c77bcc94d5594d90349
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_fcd305d081e042ba93f30f3ebca202b6
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: updateMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "meta name",
+        "description": "description90",
+        "multiple": false
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-65
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b80c0230ce754cb08a04767125c1e643
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: deleteMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-69
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d76b91ba81e24b5ea2adf4f47dc23c3c
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getMetaPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_02ded17d811a45818e1fcd081aed6386
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: addMetaOptions
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}/options'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "value": "meta name",
+        "order": 1
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-51
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_560a2cb2bc5540378c5d162a5dc27011
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: updateMetaOption
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}/options/{optionUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "value": "meta name",
+        "order": 1
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-43
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e6eb56f37db94d5dbfbfbf317756d321
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: deleteMetaOption
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/meta/{metaUid}/options/{optionUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-37
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2c3c33b694284f248275d7b5fc4003b8
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getEntityMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e1c9a246558a4a06ae3d2122d9867b9c
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: addEntityMeta
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "metaUid": "Abc_123-XY",
+        "value": 92
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-68
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock39
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_01132b9059854fc6a124e94b34c6aeca
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: editEntityMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta/{metaUid}'
+  body:
+    mimeType: application/json
+    text: '{"value":null}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-47
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock98
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a4def98e0c1249079e199946d49d6ae2
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: In case of having multiple file metas referencing the same meta, the selection of affected entity meta is undetermined, use [`PUT /accounts/{accountUid}/entities/{entityUid}/meta/{metaUid}/{entityMetaUid}`](#tag/Entity/operation/editSpecificEntityMeta) instead.
+- name: deleteEntityMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta/{metaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-98
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7d442e070b2840e6a126aa3e2c030999
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: editSpecificEntityMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta/{metaUid}/{entityMetaUid}'
+  body:
+    mimeType: application/json
+    text: '{"value":null}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-59
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock40
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_72bcd62d3b71434c802d394be36adb1b
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: deleteSpecificEntityMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/meta/{metaUid}/{entityMetaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-89
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0a1d0cdc1dad4fe486405ea62ca35a0a
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getActiveEntityMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/active-meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_62024afc62e74557b92193cf386dc1dd
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getFileMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_238c6f0990384a5b8dcf905628a3b0c1
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: addFileMeta
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "metaUid": "Abc_123-XY",
+        "value": 94
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-F1
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock85
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f315032c4b1a4894a571ce06c8ca5993
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: updateFileMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta/{metaUid}'
+  body:
+    mimeType: application/json
+    text: '{"value":null}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-82
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock97
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ab049d042b3f4f01af740561707bf1c0
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: In case of having multiple file metas referencing the same meta, the selection of affected file meta is undetermined, use [`PUT /accounts/{accountUid}files/{fileUid}/meta/{metaUid}/{fileMetaUid}`](#tag/Meta/operation/updateSpecificFileMeta) instead.
+- name: deleteFileMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta/{metaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-41
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock44
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4f0283a85424478babc9574c291beb59
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: updateSpecificFileMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta/{metaUid}/{fileMetaUid}'
+  body:
+    mimeType: application/json
+    text: '{"value":null}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-59
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock40
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f1d34325e894487ca1bed333739c9d69
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: deleteSpecificFileMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/meta/{metaUid}/{fileMetaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-53
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock58
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4140f603c9214d5e802a8e8875324d85
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getFileActiveMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/active-meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2daba9f32cd343ae94147e8e9c7fc579
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getFolderMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c0997af3513b4fa1853396720e0ccb0e
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: addFolderMeta
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/meta'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "metaUid": "Abc_123-XY",
+        "isRequired": false,
+        "isRecursive": false,
+        "includeFiles": true,
+        "includeLinks": true,
+        "includeFolders": false
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-38
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_74491b34773c434aa4ab12de002a2900
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: updateFolderMeta
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/meta/{metaUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "isRequired": false,
+        "isRecursive": false,
+        "includeFiles": true,
+        "includeLinks": true,
+        "includeFolders": false
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-20
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5eb38a580e134f8895cfeea335cc8d06
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: deleteFolderMeta
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/meta/{metaUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-57
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_132f5f87c90d46dc9ad4889c48a3fa80
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getFolderActiveMeta
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/active-meta'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d52354db170f4cb78c66b19ab3945d3a
+  parentId: fld_d8513278f2484942b8b316793e02d992
+  description: ''
+- name: getTags
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  - name: sort
+    value: '["name","-uid"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_350907fa9b3d41e39edbcd4f957169a3
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: addTag
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/tags'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "myTag",
+        "parentUid": "parentUi47"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-14
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_bc1b45ed8ea142f48f1a7586ec90c35a
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getRootTags
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/root'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  - name: sort
+    value: '["name","-uid"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5bf221f520a84f92baf979103fd674c7
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getTag
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-98
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2f4fa019484e44b4806a00fb26393da8
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: updateTag
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "myTag",
+        "parentUid": "parentUi21"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-33
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_87d460d5b74943e6a6f05354706d1950
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: deleteTag
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-34
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_144ee331c67d48039b549e259af07186
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getTagPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d0719368a5e24791ad963a705206e496
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getSubTags
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}/tags'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  - name: sort
+    value: '["name","-uid"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8db9321cdae44d4883cec83090cea9bf
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getEntityTags
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/tags'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a201ba9868404c36919256a1e64de183
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: addEntityTags
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/tags'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "tags": [
+          {
+            "name": "Johnny Smith"
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-29
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock55
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a0e4d572def34a049881012edddae4d2
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: deleteEntityTag
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/tags/{tagUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-11
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock72
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_741f102904ca4ef68e8fbaa85aa0f259
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getFileTags
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/tags'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_e77c00c66c2a4ef194949c57a8bcf20e
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: addFileTags
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/tags'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "tags": [
+          {
+            "name": "myTag"
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-37
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock12
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_671bc334f3a14a58a62a552200721913
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: deleteFileTags
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/tags/{tagUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-57
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock79
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_84af9b8c611d4a4db995ee2c2969d668
+  parentId: fld_cabc89ed959e4efeafea66540a43879a
+  description: ''
+- name: getPeople
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/people'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c37aff99269c42d68e1a6c2b6e32cf3c
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: addPerson
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/people'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "Johnny Smith"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-93
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cde1f878c3c94f00822037cd7d85ca86
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: getPerson
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/people/{personUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-72
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0393f7c6623149838dd3d3dffee9e667
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: updatePerson
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/people/{personUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "Johnny Smith"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-88
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3984e7864fcf4ac1bb314139d3587748
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: deletePerson
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/people/{personUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-77
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cf6d9bcc16eb4a2baac4cfd9bce7e6c0
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: getPersonPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/people/{personUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f7bc6829f6274422a7f6bbdfa7f377b0
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: getFilePeople
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/people'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7b6aa41f02f5453282ded59456f3c0e1
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: addFilePeople
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/people'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "people": [
+          {
+            "name": "Johnny Smith"
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-57
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock97
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9de004cdfb3c45b0a3879c8a62a7e996
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: deleteFilePerson
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/people/{personUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-96
+    disabled: false
+  - name: X-Folderit-Lock
+    value: X-Folderit-Lock77
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_be0c58b4c7d2422fb1d100ed1647ad0e
+  parentId: fld_ba4c1039e74e449d8e70426cfeb5f092
+  description: ''
+- name: getAllReminders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/reminders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort95"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination18
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_452c22219f574e32ba519bf389318073
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: updateReminder
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/reminders/{reminderUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "content": "Hello",
+        "remindAt": "1537177837",
+        "recurrence": "daily"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-58
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b5b6c1fc13ff4391ba66f6bd9d3c5d9f
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: deleteReminder
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/reminders/{reminderUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-68
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_48d9baa9eae74ce189e82513b7fae9c4
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: getFileReminders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/reminders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort65"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination17
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7f675f878a4d4a5a94eeb19e4e5ce933
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: addFileReminders
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/reminders'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        {
+          "content": "Hello",
+          "remindAt": "1537177837",
+          "email": "someEmail@foo.bar",
+          "groupUid": "Abc_123-XY",
+          "recurrence": "quarterly"
+        }
+      ]
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-14
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_00c4b0b62bad4953bdd3fabba38c3ccc
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: getFolderReminders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/reminders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort61"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination93
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f9301b20686c44c8b10ab207b89ffff2
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: addFolderReminders
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/reminders'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        {
+          "content": "Hello",
+          "remindAt": "1537177837",
+          "email": "someEmail@foo.bar",
+          "groupUid": "Abc_123-XY",
+          "recurrence": "quarterly"
+        }
+      ]
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-45
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_df8e1b6cc51945d1bfe65f7b74c7fa3f
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: getEntityReminders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/reminders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '20'
+    disabled: false
+  - name: sort
+    value: '["sort3"]'
+    disabled: false
+  headers:
+  - name: X-Pagination
+    value: X-Pagination17
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_880ea93a4ec640db8180bb7a78aa05e0
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: addEntityReminders
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/reminders'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        {
+          "content": "Hello",
+          "remindAt": "1537177837",
+          "email": "someEmail@foo.bar",
+          "groupUid": "Abc_123-XY",
+          "recurrence": "quarterly"
+        }
+      ]
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-26
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b7f619d0c6504c759b724dc13c8c763a
+  parentId: fld_15d5523a1fe34cc596522c2690f83e1a
+  description: ''
+- name: getEntityResolutions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/resolutions'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_de37712dbaf94027a1e53684ac57d2ee
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: addEntityResolution
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/resolutions'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "type": "parallel",
+        "method": "DocuSign",
+        "invites": [
+          {
+            "email": "email83",
+            "userUid": "userUid15",
+            "groupUid": "groupUid24",
+            "order": 190
+          }
+        ],
+        "note": "note77",
+        "showMeta": false,
+        "showRelatedEntities": true,
+        "timeoutTime": "2025-10-15T07:50:20.6109561Z"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-38
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_74b2b6636dad4df59c9aa989debe82aa
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: getResolution
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ef77640ff93442f399441b6ed53e38be
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: updateResolution
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "type": "parallel",
+        "note": "note42",
+        "showMeta": true,
+        "showRelatedEntities": false,
+        "timeoutTime": "2025-11-14T07:50:20.6778569Z"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-12
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c70a877da16540fbbeebd599c7a48aab
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: deleteResolution
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-98
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9b4c44ab193948639b51e5069ceb4ed6
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: getResolutionInvites
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}/invites'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_400b97ab27694339820adadc313f3ba5
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: addResolutionInvites
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}/invites'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        {
+          "email": "email83",
+          "userUid": "userUid15",
+          "groupUid": "groupUid24",
+          "order": 190
+        }
+      ]
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-50
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d5304b0d215a472883aceafe62228800
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: getResolutionInvite
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}/invites/{resolutionInviteUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5c2b83a00527481b8317405f4a0dc7f5
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: updateResolutionInvite
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}/invites/{resolutionInviteUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "order": 27
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-31
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_d65ba01255444941b596ffe01bfa2f53
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: deleteResolutionInvite
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/resolutions/{resolutionUid}/invites/{resolutionInviteUid}'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-36
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_75f260a74fa94ee18fc4d035a7043021
+  parentId: fld_67f80545b0d64058ac1fe4565252b615
+  description: ''
+- name: getEntityWorkflows
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/workflows'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7e237df616214a7c8f7ced2dfb104695
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: addEntityWorkflow
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/entities/{entityUid}/workflows'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "entityUid45",
+        "isActive": true,
+        "isRecursive": true,
+        "name": "name28",
+        "steps": [
+          {
+            "type": "move",
+            "params": {
+              "destination": "destination45"
+            }
+          }
+        ],
+        "triggers": [
+          {
+            "events": [
+              "entityNumber"
+            ],
+            "condition": [
+              "any"
+            ]
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-67
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_023edbc7f4ce40efa395c7bb4ca2b534
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getAccountWorkflows
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c0b5df0838024021b6a74f6cf503d624
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: addWorkflow
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/workflows'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "entityUid": "entityUid45",
+        "isActive": true,
+        "isRecursive": true,
+        "name": "name28",
+        "steps": [
+          {
+            "type": "move",
+            "params": {
+              "destination": "destination45"
+            }
+          }
+        ],
+        "triggers": [
+          {
+            "events": [
+              "entityNumber"
+            ],
+            "condition": [
+              "any"
+            ]
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-58
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_50f8b8345b4f49fc8abd425ff83a2b92
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getAllWorkflows
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/all'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cac3fd357d89488e871f71a4694fdc34
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getWorkflow
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a093ff6a1cee46a6ab09d6d553ad5598
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: updateWorkflow
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "isActive": false,
+        "isRecursive": true,
+        "name": "name25",
+        "steps": [
+          {
+            "type": "move",
+            "params": {
+              "destination": "destination45"
+            }
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-54
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c9104fcbe1dd44c3b44fea8bf9f4bfb2
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: deleteWorkflow
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-22
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_c799e540f4854c26a6d001101ae63de5
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getWorkflowVersions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/versions'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property2"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_229f0a849a8a4f5db20b13c22f20a50c
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: addWorkflowVersion
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/versions'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "steps": [
+          {
+            "type": "move",
+            "params": {
+              "destination": "destination45"
+            }
+          }
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-76
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_909fa57d8196434fae3c05915cf35a27
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getWorkflowVersion
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/versions/{workflowVersionId}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_21616e0b668149be9d7087a69c3e3f9b
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: updateWorkflowVersion
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/versions/{workflowVersionId}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "isActive": true
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["property1"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-89
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_ad678f2e75f44f4ebf1396cc6a3e43f0
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: deleteWorkflowVersion
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/versions/{workflowVersionId}'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-36
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0d92b888deaf4518acd4d725b505a2d4
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getWorkflowTriggers
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/triggers'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5f84bbadee3e4ee98fb034c772e6517f
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: addWorkflowTrigger
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/triggers'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "events": [
+          "entityNumber"
+        ],
+        "condition": [
+          "any"
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-24
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_7ada22d95f204c45b359944a1d42ed96
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getWorkflowTrigger
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/triggers/{workflowTriggerId}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_473ff764324d4a84a0f18d2c52f885c7
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: updateWorkflowTrigger
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/triggers/{workflowTriggerId}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "condition": [
+          "any"
+        ],
+        "events": [
+          "entityRelationNew"
+        ]
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-40
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_825612f37e7542a3a9521e9285d1dc9a
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: deleteWorkflowTrigger
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/workflows/{workflowUid}/triggers/{workflowTriggerId}'
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-66
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_71cf211c58a449d8bf089375e2f797a2
+  parentId: fld_2089ee5c7e9e4584bf78418285798385
+  description: ''
+- name: getAllUsersWithAccess
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/access/users'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_69a48700d569496198f9a83d7183e09f
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: listAccountShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_45db737650704235968d98210d14bb37
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: shareAccount
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/shares'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "groupUid": "Abc_123-XY",
+        "userUid": "Abc_123-XY",
+        "email": "someEmail@foo.bar",
+        "role": "PREVIEW",
+        "settings": {
+          "isRecursive": true,
+          "accountRead": false,
+          "accountDownload": false,
+          "accountUpdate": false,
+          "accountShare": false,
+          "accountAudit": false,
+          "accountGroups": false,
+          "accountUsers": false,
+          "accountMeta": false,
+          "accountRecycleBin": false,
+          "accountNumbering": false,
+          "accountIdp": false,
+          "accountPasswordPolicy": false,
+          "folderCreate": false,
+          "folderRead": true,
+          "folderDownload": true,
+          "folderUpdate": false,
+          "folderMove": false,
+          "folderDelete": false,
+          "folderDuplicate": false,
+          "folderShare": false,
+          "folderPublicShare": false,
+          "folderAudit": true,
+          "fileCreate": true,
+          "fileRead": true,
+          "filePreview": true,
+          "fileDownload": true,
+          "fileUpdate": false,
+          "fileUpdateContent": false,
+          "fileMove": false,
+          "fileDelete": false,
+          "fileDuplicate": false,
+          "fileShare": false,
+          "filePublicShare": false,
+          "fileAudit": true
+        },
+        "expiration": 1537177837
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-27
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b0989266b0634f4a814733b32525c8ac
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: getShare
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/shares/{shareUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a5655b4b13e845389729376288fb5853
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: updateShare
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/shares/{shareUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "role": "EDIT",
+        "status": "ACTIVE",
+        "expiration": 1537177837,
+        "settings": {
+          "isRecursive": true,
+          "accountRead": false,
+          "accountDownload": false,
+          "accountUpdate": false,
+          "accountShare": false,
+          "accountAudit": false,
+          "accountGroups": false,
+          "accountUsers": false,
+          "accountMeta": false,
+          "accountRecycleBin": false,
+          "accountNumbering": false,
+          "accountIdp": false,
+          "accountPasswordPolicy": false,
+          "folderCreate": false,
+          "folderRead": true,
+          "folderDownload": true,
+          "folderUpdate": false,
+          "folderMove": false,
+          "folderDelete": false,
+          "folderDuplicate": false,
+          "folderShare": false,
+          "folderPublicShare": false,
+          "folderAudit": true,
+          "fileCreate": true,
+          "fileRead": true,
+          "filePreview": true,
+          "fileDownload": true,
+          "fileUpdate": false,
+          "fileUpdateContent": false,
+          "fileMove": false,
+          "fileDelete": false,
+          "fileDuplicate": false,
+          "fileShare": false,
+          "filePublicShare": false,
+          "fileAudit": true
+        }
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-F5
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4953ac9ffa574441bdc1bee0d6ef73e4
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: deleteShare
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/shares/{shareUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-64
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_75f4bf535603425eb86fa8b25eafc4fd
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: getSharePermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/shares/{shareUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9b2e722994c946279b35f9c3b2debe8d
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: listFileShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3a2b204b908748caaedc864145adad42
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: shareFile
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/shares'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "groupUid": "Abc_123-XY",
+        "userUid": "Abc_123-XY",
+        "email": "someEmail@foo.bar",
+        "role": "EDIT",
+        "settings": {
+          "isRecursive": true,
+          "accountRead": false,
+          "accountDownload": false,
+          "accountUpdate": false,
+          "accountShare": false,
+          "accountAudit": false,
+          "accountGroups": false,
+          "accountUsers": false,
+          "accountMeta": false,
+          "accountRecycleBin": false,
+          "accountNumbering": false,
+          "accountIdp": false,
+          "accountPasswordPolicy": false,
+          "folderCreate": false,
+          "folderRead": true,
+          "folderDownload": true,
+          "folderUpdate": false,
+          "folderMove": false,
+          "folderDelete": false,
+          "folderDuplicate": false,
+          "folderShare": false,
+          "folderPublicShare": false,
+          "folderAudit": true,
+          "fileCreate": true,
+          "fileRead": true,
+          "filePreview": true,
+          "fileDownload": true,
+          "fileUpdate": false,
+          "fileUpdateContent": false,
+          "fileMove": false,
+          "fileDelete": false,
+          "fileDuplicate": false,
+          "fileShare": false,
+          "filePublicShare": false,
+          "fileAudit": true
+        },
+        "public": "True",
+        "expiration": 1537177837
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-49
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4c88da5d20a7493d96c58ef8e8f62c38
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: listFolderShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a8c56e3c6a3243ed9f6c38f5ab8cd521
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: shareFolder
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/shares'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "groupUid": "Abc_123-XY",
+        "userUid": "Abc_123-XY",
+        "email": "someEmail@foo.bar",
+        "role": "EDIT",
+        "settings": {
+          "isRecursive": true,
+          "accountRead": false,
+          "accountDownload": false,
+          "accountUpdate": false,
+          "accountShare": false,
+          "accountAudit": false,
+          "accountGroups": false,
+          "accountUsers": false,
+          "accountMeta": false,
+          "accountRecycleBin": false,
+          "accountNumbering": false,
+          "accountIdp": false,
+          "accountPasswordPolicy": false,
+          "folderCreate": false,
+          "folderRead": true,
+          "folderDownload": true,
+          "folderUpdate": false,
+          "folderMove": false,
+          "folderDelete": false,
+          "folderDuplicate": false,
+          "folderShare": false,
+          "folderPublicShare": false,
+          "folderAudit": true,
+          "fileCreate": true,
+          "fileRead": true,
+          "filePreview": true,
+          "fileDownload": true,
+          "fileUpdate": false,
+          "fileUpdateContent": false,
+          "fileMove": false,
+          "fileDelete": false,
+          "fileDuplicate": false,
+          "fileShare": false,
+          "filePublicShare": false,
+          "fileAudit": true
+        },
+        "public": "True",
+        "expiration": 1537177837
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-76
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_894bbb851f634d0295c0b35164b9a2db
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: listTagShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_23f915eceef74beca09f57b551cf93f9
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: shareTag
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/tags/{tagUid}/shares'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "groupUid": "Abc_123-XY",
+        "userUid": "Abc_123-XY",
+        "email": "someEmail@foo.bar",
+        "role": "PREVIEW",
+        "settings": {
+          "isRecursive": true,
+          "accountRead": false,
+          "accountDownload": false,
+          "accountUpdate": false,
+          "accountShare": false,
+          "accountAudit": false,
+          "accountGroups": false,
+          "accountUsers": false,
+          "accountMeta": false,
+          "accountRecycleBin": false,
+          "accountNumbering": false,
+          "accountIdp": false,
+          "accountPasswordPolicy": false,
+          "folderCreate": false,
+          "folderRead": true,
+          "folderDownload": true,
+          "folderUpdate": false,
+          "folderMove": false,
+          "folderDelete": false,
+          "folderDuplicate": false,
+          "folderShare": false,
+          "folderPublicShare": false,
+          "folderAudit": true,
+          "fileCreate": true,
+          "fileRead": true,
+          "filePreview": true,
+          "fileDownload": true,
+          "fileUpdate": false,
+          "fileUpdateContent": false,
+          "fileMove": false,
+          "fileDelete": false,
+          "fileDuplicate": false,
+          "fileShare": false,
+          "filePublicShare": false,
+          "fileAudit": true
+        },
+        "expiration": 1537177837
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-F9
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5b798202318042609b731ecb621b5321
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: getAllPublicShares
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/access/public'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_5cb8f95c8b6f429b8d01d05e7dda2c24
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: getAllUnacceptedShareEmails
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/access/unaccepted'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_db8f62e44e314971bb0ff66561fdbbb5
+  parentId: fld_842052808dbd42f393557a5ec53bbda7
+  description: ''
+- name: getGroups
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  - name: sort
+    value: '["name"]'
+    disabled: false
+  - name: expand
+    value: '["shares","users"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_bb4e8a1d834146f6b13bb342ea8d7c7b
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: addGroup
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/groups'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My group"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-45
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_6d543fada54a437a8144784a1beafe7d
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroup
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["shares","users"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f203801339344c3e9ea262ceab6fbfc7
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: updateGroup
+  method: PUT
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "name": "My group"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-85
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8c5adfb9ac274391b08e40a716f37196
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: deleteGroup
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-82
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a68a98fcc10e4581ba236bbf87d7b983
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_675e6c949a044eb4a314911955bf1dd9
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupSharedItems
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/shares'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["account"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_45b2a2bae6474bf49fadd8ea31749a77
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupMembers
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/members'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_8b67c1734d514e28abfdbe16e91cfffc
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: addGroupMember
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/members'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "email": "newMember@foo.bar"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-46
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9297b1212b9c4a7998ebd679688f305e
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: deleteGroupMember
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/members/{memberUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-32
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0b05a214849f44f78a15cdd46488c043
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupUsers
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/users'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_cd9de4e6f8cd411f9495335769a28356
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: addGroupUser
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/users'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "email": "newMember@foo.bar"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-F7
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_deaab03c38814a51b84a42de57445bf1
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: deleteGroupUser
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/users/{userUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-94
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_9d560ebda1df4fcf820bbd1d9bfe4ffa
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupUserPermissions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/users/{userUid}/permissions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_88ecf7c9655841b6b2ef2ce34b457498
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getGroupChildren
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/children'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '50'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4123c57217ed4be1abd8afc6a5ca0880
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: addGroupChild
+  method: POST
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/children'
+  body:
+    mimeType: application/json
+    text: >-
+      {
+        "uid": "Abc_123-XY"
+      }
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  - name: X-Folderit-Request-Key
+    value: X-44
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3bdce41a0eb744b98ce5004afe3d82c6
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: deleteGroupChild
+  method: DELETE
+  url: '{{default}}/v2/accounts/{accountUid}/groups/{groupUid}/children/{childUid}'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  headers:
+  - name: X-Folderit-Request-Key
+    value: X-90
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f7eed8886bb44d38a312ca07212ae337
+  parentId: fld_35ce3de081bf46eabfff4d8ac62bf015
+  description: ''
+- name: getPlans
+  method: GET
+  url: '{{default}}/v2/plans'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a62269ced2324d4ba90672953a84ecfb
+  parentId: fld_fa9e64952f1b40a580a4a726fb6db192
+  description: ''
+- name: searchAutocomplete
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/search/simple'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["file"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_bf82b30b62c14ea0b3babe7a50989b3d
+  parentId: fld_ff5b9dcbe37b414b9c32e611149e5415
+  description: Alternatively, POST request is also supported
+- name: searchEntities
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/search/entities'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["link"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_0a310b5f77d1472db0ad89e96a5964f3
+  parentId: fld_ff5b9dcbe37b414b9c32e611149e5415
+  description: Alternatively, POST request is also supported
+- name: searchFiles
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/search/files'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["entity"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4676dc1d1ac54fcc805988ba6f6964a6
+  parentId: fld_ff5b9dcbe37b414b9c32e611149e5415
+  description: Alternatively, POST request is also supported
+- name: searchFolders
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/search/folders'
+  parameters:
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["folder"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_2fab752a7fda4badb7101e9268c2fb7e
+  parentId: fld_ff5b9dcbe37b414b9c32e611149e5415
+  description: Alternatively, POST request is also supported
+- name: getUsedFileExtensions
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/search/extensions'
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_f392aa46f7b043db807bd3fd65f57c67
+  parentId: fld_ff5b9dcbe37b414b9c32e611149e5415
+  description: ''
+- name: getAccountRecentAuditTrail
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/audit/accountLog'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["id"]'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["activeUser"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_eff842a936b04938ac5b323f7b0b5f85
+  parentId: fld_081da3171457417eb9fe3cca50f52778
+  description: ''
+- name: getAccountAuditTrail
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/audit'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["name"]'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  - name: expand
+    value: '["activeUser"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_a5861f4f71834fbf90e019c9d04feaf0
+  parentId: fld_081da3171457417eb9fe3cca50f52778
+  description: ''
+- name: getFileAuditTrail
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/files/{fileUid}/audit'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["name"]'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_4ea70ed138944fa29e8daf093f6a0712
+  parentId: fld_081da3171457417eb9fe3cca50f52778
+  description: ''
+- name: getFolderAuditTrail
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/folders/{folderUid}/audit'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["name"]'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_b5a49f2f0175403abeea9eae915f1a32
+  parentId: fld_081da3171457417eb9fe3cca50f52778
+  description: ''
+- name: getFileSyncLog
+  method: GET
+  url: '{{default}}/v2/accounts/{accountUid}/audit/syncLog'
+  parameters:
+  - name: page
+    value: '1'
+    disabled: false
+  - name: per-page
+    value: '500'
+    disabled: false
+  - name: sort
+    value: '["id"]'
+    disabled: false
+  - name: fields
+    value: '["uid","name"]'
+    disabled: false
+  authentication:
+    type: bearer
+  _type: request
+  _id: req_3dec981c546e4cfcaa6669a4e1386fa9
+  parentId: fld_081da3171457417eb9fe3cca50f52778
+  description: ''
